@@ -42,7 +42,7 @@ According to this OLS assumption, the error terms in the regression should all h
 If this variance is not constant (i.e. dependent on X’s), then the linear regression model has heteroscedastic errors and likely to give incorrect estimates.
 This OLS assumption of no autocorrelation says that the error terms of different observations should not be correlated with each other.
 
--A6) Optional Assumption: Error terms should be normally distributed.
+- A6) Optional Assumption: Error terms should be normally distributed.
 
 This assumption states that the errors are normally distributed, conditional upon the independent variables. This OLS assumption is not required for the validity of OLS method; however, it becomes important when one needs to define some additional finite-sample properties. Note that only the error terms need to be normally distributed. The dependent variable Y need not be normally distributed.
 
