@@ -25,7 +25,7 @@ The number of observations taken in the sample for making the linear regression 
 The X'sX ′s should be fixed (e. independent variables should impact dependent variables). It should not be the case that dependent variables impact independent variables. This is because, in regression models, the causal relationship is studied and there is not a correlation between the two variables. For example, if you run the regression with inflation as your dependent variable and unemployment as the independent variable, the OLS estimators are likely to be incorrect because with inflation and unemployment, we expect correlation rather than a causal relationship.
 The error terms are random. This makes the dependent variable random.
 
-A3) The conditional mean should be zero.
+- A3) The conditional mean should be zero.
 
 The expected value of the mean of the error terms of OLS regression should be zero given the values of independent variables.
 
@@ -45,3 +45,4 @@ This OLS assumption of no autocorrelation says that the error terms of different
 -A6) Optional Assumption: Error terms should be normally distributed.
 
 This assumption states that the errors are normally distributed, conditional upon the independent variables. This OLS assumption is not required for the validity of OLS method; however, it becomes important when one needs to define some additional finite-sample properties. Note that only the error terms need to be normally distributed. The dependent variable Y need not be normally distributed.
+
