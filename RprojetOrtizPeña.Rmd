@@ -1,0 +1,360 @@
+---
+title: "Is the Inflation a Pure Monetary Phenomenon?"
+author: "Ortiz Reynaldo, Peña Tamara"
+date: "23/4/2021"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1)Introduction.
+
+Inflation is one of the most important macroeconomic determinants in the economic performance. This is known as the permanent and sustained growth in the general price level in a countries economy (Samuelson, 1993). The problems that high unanticipated Inflation brings are diverse. One of the most notorious are the loss of the purchasing power and the decrease of the quality of life of the population by not being able to consume goods and services as they did before.
+Additionally, the level of investment falls due to economic instability, uncertainty, and consequently the economic growth slows down. All these consequences make optimal inflation control imperative (Sabastano and Reinhart, 2003). To measure this economic variable, the central bank of each country calculate the price growth of all the products and services consumed within the economy, which is the variation of the prices of goods and services from one moment to the next. 
+These goods and services are clustered in a basic basket, which is defined by each country, in this basket, each good and service has a weighting granted by the National Statistics Institute. Normally, the necessary goods have a higher weighting (International Monetary Fund, 2006). On the other hand, there is hyperinflation when inflation increases over 50%. When this happens, the level of prices in the economy increases without any control and the local currency loses its value (Cagan, 1956). 
+It is important to remember that both countries, Bolivia and Argentina, have suffered a hyperinflation period. In Argentina it took place between 1989 and 1990, by then, the inflation was around 22.226%. This episode was the product of a process of several years and several factors: high indebtedness, economic stagnation, divestment, fiscal imbalances, a negative balance of payments and a very high social expenditure (Olivera, 2002). 
+For the Bolivian case, inflation rate was one of the highest in history, between the years 1984 and 1985. During this time, it reached 23.447% according to the Bolivian Central Bank (BCB, 2016) this leaded to a daily increase on prices of goods and services, and once again, high government indebtedness and high interest rates were the main causes for inflation to grow exponentially. As Bolivia could no longer access international credit, to fulfill its debts it had the need to issue large amounts of its currency. After the hyperinflation and when the level of price is increasing, Bolivian people prefer to change their local currency to US dollars, to not lose their purchasing power. This explains why the Bolivian Central Bank has a special care in this macroeconomic variable (Rocha et al., 2007).
+Finally, inflation attacks most of the world’s economies, their performance is distorted and could imply erroneous decisions of economic agents. Also, since the uncertainty is increased, the investment goes down as well as the economic growth, it has a negative impact on tax collection, generating a negative redistribution of income, since the economically weakest sectors suffer most of the impact. And in extreme cases, the currency is no longer used as a medium of exchange because it lacks value (Krikorian, 2007). With this introduction, we aimed to show that inflationary control is an important matter, especially for countries like Bolivia or Argentina.
+
+
+# 2) Data and Methods.
+
+To carry out the analysis of the project different economic variables are needed. Such as Inflation, Monetary Emission, the Exchange Rate, the Trade Balance and the Legal Reserves.
+
+
+* **Inflation**: is the general increase in prices in the economy
+
+* **Monetary Emission**: the amount of money that is created from one month to another in the economy
+
+* **Exchange rate**: the rate at which one (local) currency is exchanged for another (foreign).
+
+* **Balance of Trade**:is the difference between exports with imports in a country.
+
+* **Legal Reserve**: It is a percentage that all the agents of the financial system must deposit, on a daily basis, in the Central Bank.
+
+The source of the data of the variables mentioned above comes from different economic institutions. The Central Banks of Argentina and Bolivia, the International Monetary Fund (IMF), the World Trade Organization (WTO), and Bloomberg (To be able to access the exchange rate). It is important to mention that the data is monthly, from January of 2006 until February of 2019 (We are working with monthly data, because the Trade Balance, unlike the other variables, is reported monthly). 
+
+
+## 2.1)Inflation and Monetary Emission.
+
+Let us put an example of how inflation is mainly explained by an increase in the monetary emission. In 1923, after the first World War, Germany remained highly indebted, and to face this debt the government started to print bills without any control, leading to hyperinflation, a quick loss of value for the German currency, unemployment, and social chaos. The inflation rate was about 29.000%, and the price level of the economy doubled every three days. This situation reached the extreme in which the bills were burned instead of firewood since it had not value at all (Hora, 2006). 
+As mentioned before, Bolivia and Argentina also followed hyperinflation processes, for the increase in monetary emission. In fact, many economists suggest that inflation is a pure monetary phenomenon. Before 1980, the countries had a difficult time facing the inflation, however after giving independence to central banks to move their instruments such as the interbank rate, inflation could be controlled at a socially acceptable cost. 
+Central banks have a singularity; they have the monopoly over the creation of monetary base. Whit this “ability”, central banks can regulate inflation (Hetzel, 2004). Following the work of Hetzel (2004), inflation is set as a monetary phenomenon, by controlling the creation of money, central banks determine the behavior of inflation. But, if this theory is absolute, central banks should easily control inflation and then there should not be more hyperinflation processes in the world. 
+However, this processes still exist, leaving aside countries like Venezuela, which has the biggest hyperinflation in history, given by poor economic management, but also by the fact that the inefficacy of the government for providing the essential products to the population (Pardo, 2018). In Argentina, the central bank attempt to manage Inflation the best way possible. This institution regulated the monetary emission to control the inflation, but without the desired results. 
+The graphic below shows that for the Argentinian economy, when the Monetary Emission increases, the Inflation increases too.
+
+```{r}
+#1 Import data base
+
+library(readxl)
+Argentina_Data_Base <- read_excel("Argentina Data Base.xlsx")
+View(Argentina_Data_Base)
+
+#2 Changes Names in Data Set
+
+names(Argentina_Data_Base)[names(Argentina_Data_Base)=="Inflacion"] = "Inflation"
+names(Argentina_Data_Base)[names(Argentina_Data_Base)=="Emision"] = "Monetary Emission"
+names(Argentina_Data_Base)[names(Argentina_Data_Base)=="Encaje Legal"] = "Legal Reserve"
+names(Argentina_Data_Base)[names(Argentina_Data_Base)=="Balanza de Pagos"] = "Balance of Trade"
+names(Argentina_Data_Base)[names(Argentina_Data_Base)=="Tipo de Cambio"] = "Exchange Rate"
+
+#3 Graphic
+
+
+par(mar = c(5, 5, 3, 5))
+plot(AR3, type ="l", ylab = "Billions of Ar$",
+     main = "Inflation and Monetary Emission, Argentina", xlab = "Year",
+     col = "blue")
+par(new = TRUE)
+plot(AR2, type = "l", xaxt = "n", yaxt = "n",
+     ylab = "", xlab = "", col = "red", lty = 2)
+axis(side = 4)
+mtext("Percentage (%)", side = 4, line = 3)
+legend("topleft", c("M.E.", "Inflation"),
+       col = c("blue", "red"), lty = c(1, 2))
+
+
+```
+
+On the other hand, this graphic shows how for the Bolivian economy, an increase on the monetary emission there is an increase on the inflation rate but only in some periods, not as constant as in Argentina.
+
+
+```{r}
+#4 Import Data Base
+
+library(readxl)
+Datos_Bolivia <- read_excel("Datos Bolivia.xlsx")
+View(Datos_Bolivia)
+
+#5 Changes Names in Data Set
+
+names(Datos_Bolivia)[names(Datos_Bolivia)=="Inflacion"] = "Inflation"
+names(Datos_Bolivia)[names(Datos_Bolivia)=="Emision"] = "Monetary Emission"
+names(Datos_Bolivia)[names(Datos_Bolivia)=="Encaje Legal"] = "Legal Reserve"
+names(Datos_Bolivia)[names(Datos_Bolivia)=="Balanza de Pagos"] = "Balance of Trade"
+names(Datos_Bolivia)[names(Datos_Bolivia)=="Tipo de cambio"] = "Exchange Rate"
+
+
+#6 Graphic
+
+par(mar = c(5, 5, 3, 5))
+plot(Bo11, type ="l", ylab = "Billions of Bs$",
+     main = "Inflation and Monetary Emission, Bolivia", xlab = "Year",
+     col = "blue")
+par(new = TRUE)
+plot(Bo2, type = "l", xaxt = "n", yaxt = "n",
+     ylab = "", xlab = "", col = "red", lty = 2)
+axis(side = 4)
+mtext("Percentage (%)", side = 4, line = 3)
+legend("topleft", c("M.E.", "Inflation"),
+       col = c("blue", "red"), lty = c(1, 2))
+
+
+```
+So, since inflation, not only depends on the Monetary Emission we will study other economic variables that can explain it.  
+
+## 2.2)Inflation and Exchange rate.
+
+Many countries have more than one currency present in the economy. This is the case of Bolivia and Argentina, both have two currencies. In the Bolivian economy, the peso Boliviano and the U.S. Dollar. The local currency is the most used, especially for daily operations like shopping in a supermarket, transportation payment, among others, but also for savings and loans. However, the U.S. Dollar is used for buying houses and cars, considered as “expensive transactions” (BCB, Informe de Politica Monetaria, 2017). There also exist some savings in this currency, although there is a small part of the general savings. In Argentina, on the period of 1996 and 2001 the peso Argentino had the same value as the U.S. Dollar, that is to say, one-peso Argentino was equivalent to one U.S. Dollar. In Argentina as in the same cases as in Bolivia, the national currency is the most used for daily transactions and the U.S. Dollar is used to buy houses and cars (BCRA, 2017). 
+The Exchange Rate is an important economic variable, especially in foreign trade. This variable allows to see the performance of the economies. If a central bank, decides to increase the exchange rate, the local currency will lose value in comparison of another currency. This means that countries are depreciating the local currency, in order to increase the competitiveness of its products, but if the country decides to decrease the exchange rate, the local currency will win value in comparison of another currency, the country is appreciating the local currency, with the purpose of having a stronger currency and as an anchor to people’s expectations. As Bolivia and Argentina, have suffered a hyperinflationary process, population is cautious and with the purpose of not losing purchasing power, they tend to save in U.S. Dollars. 
+If the governments decide to depreciate local currency, it will create an economic disturbance, and this is currently happening in Argentina. Where the government has created something called CEPO to the U.S. Dollar. This practice dictates that the Argentinian population has a limit to buy U.S. Dollars. In this moment that amount is 200$ per person per month. This practice is negative for the economy, it increases the inflation because the imported products become more expensive, and a black currency market is created. In this parallel market the U.S. Dollar is sold at a much higher exchange rate than the official rate (Bulat, 2019). 
+In Bolivia, the panorama is different. Since the year 2008 the Bolivian central bank imposed a fix exchange rate, this to have a stronger local currency, this process is called the “Bolivianizacion” (BCB, 2016). This mechanism allows Bolivian population to increase their savings in local currency. This is also a variable that must be well controlled by central banks because when these institutions decide, either appreciate or depreciate the local currency, this action will have a direct effect in the importation and exportation of the goods and services.
+And this brings us to talk about the Pass-Through effect. This economic phenomenon is the effect of inflation transmission, in other words the imported inflation. It means that when a country imports different product, it cannot decide their prices, so if a country wants to make its products more competitive, it will decrease its exchange rate, for reducing the prices in comparison to other countries with higher exchange rate.
+
+
+## 2.3)Inflation and Balance of Trade.
+
+The trade balance is the largest component of a country balance of payments. Here registered the imports and exports for a given period. This is mostly used to measure the relative strength of a country economy. When the trade balance is positive it means that the exports of the country are larger than its imports. This is a good situation because it means that money is entry in the country. In the contrary, when it is negative, the country is importing more that is exporting, the country is losing money (BCB, Informe de Politica Monetaria, 2016). 
+So how this variable could affect the inflation? The trade balance is linked to the exchange rate. When the trade balance is positive the risk of the pass-through effect is very small, because the country is not importing as much as it is exporting. However, when a country exports more, is not concerned about the exchange rate. 
+Also, since most of the foreign trade is in U.S. Dollars, when a country export, it gets paid in U.S. Dollars, so the International Reserves increases, and the economy has more control over the volatility of the exchange rate. On the other hand, when the trade balance is negative, it means that the country is paying more U.S. Dollars that its earning thus the International Reserves are decreasing and the Central Bank has less control over the exchange rate, which could lead to inflation. Also, when a country imports more that it exports, it is more exposed to a stronger pass-through effect. Which would lead the country to a greater inflation (Campa, 2005).
+
+```{r}
+
+#7 Graphic
+par(mar = c(5, 5, 3, 5))
+plot(AR6, type ="l", ylab = "Billions of Ar$",
+     main = "Inflation and Balance of Trade, Argentina", xlab = "Year",
+     col = "blue")
+par(new = TRUE)
+plot(AR2, type = "l", xaxt = "n", yaxt = "n",
+     ylab = "", xlab = "", col = "red", lty = 2)
+axis(side = 4)
+mtext("Percentage (%)", side = 4, line = 3)
+legend("bottomleft", c("B.T.", "Inflation"),
+       col = c("blue", "red"), lty = c(1, 2))
+```
+
+The graphic above, shows that when there is an increase on the trade balance, inflation tends to decrease. This is because the country exports are larger, so its earning U.S. dollars. However, Argentina, has more periods of a negative trade balance, so the Inflation is higher. Is good to remark, that Argentina in the past years suffered a lot in the Foreign Trade area because business had trouble to get U.S Dollars to produce more.
+
+```{r}
+#8 Graphic
+
+par(mar = c(5, 5, 3, 5))
+plot(Bo9, type ="l", ylab = "Billions of Bs$",
+     main = "Inflation and Balance of Trade, Bolivia", xlab = "Year",
+     col = "blue")
+par(new = TRUE)
+plot(Bo2, type = "l", xaxt = "n", yaxt = "n",
+     ylab = "", xlab = "", col = "red", lty = 2)
+axis(side = 4)
+mtext("Percentage (%)", side = 4, line = 3)
+legend("topleft", c("B.T.", "Inflation"),
+       col = c("blue", "red"), lty = c(1, 2))
+```
+
+
+For the Bolivian side, the graph shows that with the increase of the trade balance, inflation tends to decrease. Because there is an entry of U.S. Dollars due to the level of exports. The Pass-Through effect is small; the importation is low and International Reserve increase, the central bank has more freedom to play with the Exchange Rate in order to control Inflation.
+
+## 2.4)Inflation and the Legal Reserve.
+
+The last economic variable to be studied in this research is the Legal Reserve. This last variable is also used to control the inflation by central banks. Although there are more monetary instruments, and some more important, Legal Reserve is the one that is used by both central banks, Bolivian and Argentinian. For the regression, it is important to include this variable, because is a controlling one, and we will see if it has the same or a different effect for both countries. 
+The legal reserve is a percentage of all the deposits in the financial system of a country, that must go to the central bank vault. When a central bank wants to take out monetary liquidity of the economy, for fear of Inflation, it will increase the Legal Reserve. Conversely if the central bank wants to increase the monetary liquidity of the economy, it will decrease the Legal Reserve to encourage investment (Rocabado, Ortega, 2016). This instrument is also used to mitigate systemic risk, in other words, to prevent excessive credit growth and so, to improve the liquidity management. The evidence shows, that for the Bolivian economy, this instrument is very useful to fight the inflation (Rocabado, Ortega, 2016).
+
+```{r}
+
+#9 Graphic
+par(mar = c(5, 5, 3, 5))
+plot(AR4, type ="l", ylab = "Millions of Ar$",
+     main = "Inflation and Legal Reserve, Argentina", xlab = "Year",
+     col = "blue")
+par(new = TRUE)
+plot(AR2, type = "l", xaxt = "n", yaxt = "n",
+     ylab = "", xlab = "", col = "red", lty = 2)
+axis(side = 4)
+mtext("Percentage (%)", side = 4, line = 3)
+legend("topleft", c("L.R.", "Inflation"),
+       col = c("blue", "red"), lty = c(1, 2))
+```
+
+For Argentina, in the graphic, we can see that inflation the legal reserve are cyclical variables because they grow at the same time. Here, the central bank of Argentina tries to take out some monetary liquidity in order to control the inflation.
+
+```{r}
+
+#10 Graphic
+par(mar = c(5, 5, 3, 5))
+plot(Bo10, type ="l", ylab = "Millions of Bs$",
+     main = "Inflation and Legal Reserve, Bolivia", xlab = "Year",
+     col = "blue")
+par(new = TRUE)
+plot(Bo2, type = "l", xaxt = "n", yaxt = "n",
+     ylab = "", xlab = "", col = "red", lty = 2)
+axis(side = 4)
+mtext("Percentage (%)", side = 4, line = 3)
+legend("topleft", c("L.R.", "Inflation"),
+       col = c("blue", "red"), lty = c(1, 2))
+```
+
+The graph above shows that for Bolivia when the Inflation increases the legal reserve does not always increase. That is because, when the central bank perceives that inflation is increasing, it must do something to stop the increase. So, it takes out more money, increasing the Legal Reserve. With these two graphics, is possible to appreciate the impact of legal reserves within both economies.
+
+# 3)Methodology and Results.
+
+We will analyze some descriptive statistics of the variables that we are studying, of each country. The Argentinian economy has an inflation rate of is 8.68% for the analyzed period, and that the exchange rate with U.S. Dollars is around 8.75% what it is interesting here is the amount of monetary emission, and the legal reserve values. This means that Argentina is having a positive trade balance but at the same time is emitting a lot of money, impacting directly on the inflation rate.
+
+```{r}
+#11 Statistics
+summary(Argentina_Data_Base)
+```
+
+
+```{r}
+#12 Statistics
+summary(Datos_Bolivia)
+```
+
+The statistics for Bolivia are different for the same period of time, here, the inflation rate is 5.30% and this is linked to the monetary emission which is lower compared to Argentina.  However, the exchange rate is also lower compared to the other country but still higher. In this case since the exchange rate is around 7.15% linked to the values of the legal reserves that are low, meaning a high level of imports. But still the central bank managed to keep the inflationary rate low.
+
+For proving that in fact monetary emission, exchange rate and trade balance causes inflation, a regression with these variables must be done. The models are respectively:
+
+For Bolivia
+
+$π$B = $ME$B + $ER$B + $BT$B + $LR$B + 𝜀
+
+
+For Argentina
+
+$π$A = $ME$A + $ER$A + $BT$A + $LR$A + 𝜀
+
+Where $π$ is Inflation (measured in percentage), $ME$ Monetary Emission (measured in millions of local currency), $BT$ Balance of Trade (measured in millions of local currency), $LR$ Legal Reserve (measured in millions of local currency), and 𝜀the error term.
+
+```{r}
+
+#13 Regression
+regressionA = lm(Inflation ~`Monetary Emission`+`Legal Reserve`+`Balance of Trade`+`Exchange Rate` , data=Argentina_Data_Base)
+summary (regressionA)
+plot(regressionA)
+lines(regressionA,type="l",col="blue")
+```
+
+We can appreciate that, the model has a Multiple R-squared of 98,49%, so the model is explaining almost all the variability of the response data around its mean. The Inflation is in fact explained by the other variables of the model. The p-value is 2.2e-16, this means that the chance of being wrong in the model interpretations are almost zero, also when Monetary Emission increase by 1 unit, Inflation increases by 8.552e-06, when Legal Reserve increase by 1 unit, Inflation decreases by 8.755e-08, when trade balance increase by 1 unit, inflation decreases by 2.522e-04, for the exchange rate, when it increases by 1 unit then inflation decreases by 5.737e-0. All these values are measured in percentage because Inflation is measured in percentage.
+
+For Argentina is possible to see that when all variables increase Inflation increase too. Also, since its trade balance has been negative there is more import inflation. Exchange Rate is defined by the market, the lasts years getting U.S. dollars has been difficult, so the Exchange Rate is high, and it increases Inflation.
+
+Now lets analyze the results for the Bolivian economy. We can appreciate in the table below that the model has a Multiple R-squared of 99,08%, having the same explanation as the regression for Argentina. Also, since the p-value is 2.2e-16, our confidence level is of 99.9%. When Monetary Emission increase by 1 unit, Inflation increases by 1.186e-03. When Legal Reserve increase by 1 unit, Inflation decreases by -2.101e-04. When Balance of Trade increase by 1 unit, Inflation decreases by -4.826e-03. When Exchange Rate increase by 1 unit, Inflation decreases by -2.557e+00. And as before all the values are measured in percentage because inflation is measured in percentage.
+
+```{r}
+#14 Regression
+regressionB = lm(Inflation ~`Monetary Emission`+`Legal Reserve`+`Balance of Trade`+`Exchange Rate` , data=Datos_Bolivia)
+summary (regressionB)
+plot(regressionB)
+lines(regressionA,type="l",col="blue")
+```
+
+For Bolivia is possible to see, that when Monetary Emission increases, Inflation increase too. But there is an inverse relationship with the other variables. Legal Reserve is a control variable to Inflation, this is why we have this inverse relation. Trade Balance, the last years has been negative, this explains the negative coefficient. Lastly, Exchange Rate has been an anchor to inflationary expectations, so we have an inverse relation.
+
+Finally, in order to statistically verify that the Monetary Emission Affects Inflation, we will calculate the Granger Causality. This method is a way to investigate causality between two variables. The method is a probabilistic account of causality, uses the data sets to find patterns of correlation. Causality is related to the idea of cause-and-effect, although it is not exactly the same. A variable X is causal to variable Y if X is the cause of Y or Y is the cause of X. The Granger causality test shows if a particular variable comes before another. 
+
+In Granger Causality Test, we have two hypothese:
+
+Null Hypothesis: Monetary Emission does not Granger Cause Inflation.
+Alternative Hypothesis: Monetary Emission Does Granger Cause Inflation.
+
+```{r}
+#16 Granger Test
+
+unlink("/home/me/src/Rlibs/00LOCK-Rcpp", recursive = TRUE)
+options("install.lock"=FALSE)
+
+install.packages("lmtest")
+library(lmtest)
+
+grangertest(Inflation ~ `Monetary Emission`, order = 2, data=Argentina_Data_Base)
+
+grangertest(`Monetary Emission` ~ Inflation, order = 2, data=Argentina_Data_Base)
+
+```
+
+For Argentina we reject the null hypothesis, because P-Values (0,002408) are less than 5% (0,005) and accept the alternative hypothesis, so Monetary Emission Granger Cause Inflation. 
+
+
+```{r}
+
+#16 Granger Test
+unlink("/home/me/src/Rlibs/00LOCK-Rcpp", recursive = TRUE)
+options("install.lock"=FALSE)
+
+install.packages("lmtest")
+library(lmtest)
+
+grangertest(Inflation ~ `Monetary Emission`, order = 2, data=Datos_Bolivia)
+grangertest(`Monetary Emission` ~ Inflation, order = 2, data=Datos_Bolivia)
+```
+
+
+# 4)Conclusions.
+
+After analyzing the model and doing some statistical tests, it is possible to confirm, that indeed monetary emission causes Inflation. This macroeconomic variable is in fact a monetary phenomenon. But to control it, in the most efficient way possible, monetary tools are not enough. The Argentinian economy suffered a Monetary Emission increase of twelve times, this means monetary emission in the year 2019 was 12 times higher than monetary emission in the year 2006. That caused a 1263,15% of increase in Inflation, between the same years.
+On the contrary, the Bolivian economy suffered a Monetary Emission increase of eight times monetary emission in the same period as Argentina. That cause a 93,46% of increase in Inflation. Then it is possible to appreciate, that both countries have issued a large amount of money, but with different consequences in Inflation. With the increase of monetary emission in Argentina in 2019, until the month of November Inflation was around 52,91%, a very high rate. The Argentina Central Bank has been using a lot of monetary tools to fight this, but without the desire result. 
+While Bolivia increases the Monetary Emission by eight times, but Inflation has only doubled. This shows us an effective control of Inflation by the Bolivian Central Bank. Let us see the principal difference of the Inflation control between the two countries. First, Bolivia has a fixed exchange rate; the people inflation expectation is anchor. Secondly, the process of “Bolivianizacion” has reinforced the local currency. People in Bolivia tend to save and borrow in local currency; thus the Bolivian Central Bank has a good control in Monetary Policy. Additionally, Bolivia has imposed some unconventional monetary policies to control Inflation. 
+One of the more interesting is the Fair-Price-and-Weight Markets, were the Bolivian state offers different fruits and vegetables in order to fight the rise on prices of these products. It is important to remark that an increase in food prices will immediately and directly affect Inflation. So, with this Fairs, The Bolivian state tends to control inflation using other than monetary tools (Ontiveros, 2018). 
+Argentina, on the other hand let Exchange Rate to fluctuate without any control. Then, the Argentinian Central Bank determinate a Crawling Peg strategy for Exchange Rate (Redrado, 2019). The “Peso Argentino”, lost its value. The Argentinian Central Bank lost a large amount of its International Reserve. The economic policies did not help to control Inflation. The Argentinian Government, decided to increase the electric rate, which caused an increase in the prices of all the products in the economy. Additionally, the difficulty to access U.S. dollars, makes the importation of raw material difficult. So, all the products increase their value. 
+No matter how much the Argentinian Central Bank tried to control Inflation, it is hard to find a way to do it. But not only for monetary reasons, but for government decisions too. It is necessary to remark, that Bolivia not only controls Inflation with conventionally monetary policies, but with some unconventional monetary policies too (Ontiveros, 2018). The Bolivian Central Bank has a good and efficient way to control Inflation. Argentinian Central Bank, makes a lot of effort to control Inflation, but is not enough with only the conventional monetary policies. Maybe it could try with some other methods, because inflation control is essential to economic stability.
+
+
+# 5)References. 
+
+Akaev, A., Korotayev, A., & Fomin, A. (2012). Global inflation dynamics: Regularities & forecasts. arXiv preprint arXiv:1207.4069.
+
+Banco Central de Bolivia. (2017). Informe de Politica Monetaria. La Paz: BCB, enero
+
+Banco Central Argentino. (2017). Informe de Politica Monetaria. Buenos Aires: BCRA, enero. 
+
+Bulat, S. (2019). "Qué es, para qué sirve y cómo se elimina un cepo cambiario". La Nacion, pág. 1.
+
+Cagan, P. (1989). Hyperinflation. In Money (pp. 179-184). Palgrave Macmillan, London.
+
+Campa, J. M., & Goldberg, L. S. (2005). Exchange rate pass-through into import prices. Review of Economics and Statistics, 87(4), 679-690.
+
+Hetzel, R. L. (2004). How do central banks control inflation?. FRB Richmond Economic Quarterly, 90(3), 47-63.
+
+Hiemstra, C., & Jones, J. D. (1994). Testing for linear and nonlinear Granger causality in the stock price‐volume relation. The Journal of Finance, 49(5), 1639-1664.
+
+Hora, R. (2010). Historia económica de la Argentina. Argentina: Siglo Veintiuno Editores.
+
+International Monetary Fund. (2006). Manual for the Consumer Price Index. IMF, Geneba.
+
+Krikorian, M. (2010). La hiperinflación de 1989/90. Anales de la Facultad de Ciencias Jurídicas y Sociales, 7.
+
+Pardo, R. (2019). Inflación en Argentina: Razones y Consecuencias. Página Siete pag1.
+
+Olivera, J. H. (1964). On Structural Inflation and Latin-American'Structuralism'. Oxford economic papers, 321-332.
+
+Ontiveros, D. U. (2017). Las ferias del precio y peso justo como instrumento para controlar la inflación de alimentos en Bolivia. Revista de Análisis del BCB, 26(1), 9-42.
+
+Redrado, M. (2010). La política monetaria y financiera: Argentina frente a la crisis.
+
+Reinhart, C., & Savastano, M. (2003). Realidades de las hiperinflaciones modernas.
+
+Rocabado Palomeque, T., & Ortega Landívar, C. (2016). El encaje legal como instrumento macroprudencial en Bolivia. Banco Central de Bolivia.
+
+Rocha, W. O., Blanco, J. R., & de Política Económica, A. (1999). Determinantes de la Inflación en Bolivia. Revista de Análisis del BCB, 2(2), 7-39.
+
+Samuelson, P. F. (1994). Paul F. Samuelson. Samuelson family.
+
+Summa, R., & Serrano, F. (2018). Distribution and conflict inflation in Brazil under inflation targeting, 1999–2014. Review of Radical Political Economics, 50(2), 349-369.
+
+Stock, J. H. (2001). Macro-econometrics. Journal of Econometrics, 100(1), 29-32.
+
